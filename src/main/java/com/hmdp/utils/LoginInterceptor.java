@@ -16,7 +16,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         // 1. 获取 session
         HttpSession session = request.getSession();
         // 2. 获取 session 中的用户
-        User user = (User) session.getAttribute("user");
+        Object user = session.getAttribute("user");
         // 3. 判断用户是否存在
         if (user == null) {
             // 4. 不存在，拦截，返回 401 状态码
@@ -24,9 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         // 5. 存在，保存到 ThreadLocal 中
-        UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(user, userDTO);
-        UserHolder.saveUser(userDTO);
+        UserHolder.saveUser((UserDTO) user);
         // 6. 放行
         return true;
 
