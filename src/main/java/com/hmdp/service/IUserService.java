@@ -1,6 +1,7 @@
 package com.hmdp.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hmdp.dto.LoginFormDTO;
 import com.hmdp.dto.Result;
 import com.hmdp.entity.User;
 
@@ -18,4 +19,7 @@ public interface IUserService extends IService<User> {
 
     /* 发送验证码，并保存到 session 中*/
     Result sendCode(String phone, HttpSession session);
+
+    /* 用户登录 */
+    Result login(LoginFormDTO loginForm, HttpSession session);
 }
